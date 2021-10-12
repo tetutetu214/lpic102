@@ -7,10 +7,11 @@ ping -n アドレスで表示（DNS）
 宛先までの経路確認
 PathMTU（MaximumTransmissionUnit(最大データ量)）確認できる
 IPv4,IPv6に対応
-
-tracepath:IPv4対応
-tracepath6:IPv6対応
-
+  IPv4       IPv6
+  ping      :ping6       到達可能か
+  traceroute:traceroute6 経路確認
+  tracepath :tracepath6  最大転送量
+  
 #IPアドレスとホスト名の対応記載ファイル:名前解決に用いられるテキストファイル
 /etc/hosts
 (例)
@@ -35,13 +36,19 @@ traceroute -n yahoo.co.jp
 #NetworkManagerによるネットワーク管理を行える、curses(カーシス)ベースのインタフェース
 nmtui
 
+##NetworkManagerで管理できるネットワークデバイス
+bridge  異なるネットワーク
+ethenet 有線
+wifi    無線
+
 #nmcliコマンド＝NetworkManagerを管理するためのコマンドラインインタフェース（CLI）
 nmcli オブジェクト[コマンド]
       general
       networking
 			radio
 			connection  modify(変更する)
-			device      show(IPあそレスなどの詳細情報を表示)
+			device      show(IPアドレスなどの詳細情報を表示)
+                  delete（ソフトウェアデバイスを削除）
 
 #digコマンド：DNSへ直接問い合わせ（DNSに関するデバッギングツール）
   DNSサーバから詳細な情報
@@ -54,11 +61,16 @@ dig ns  ネームサーバ
 dig soa ゾーン（ドメインの範囲）
 dig txt テキスト情報
 
+#hostコマンド：DNSへ直接問い合わせ
+host -t 問い合わせる情報指定（a,mx,ns,any）
+host -v 詳細な出力
+
 #ウェルノウンポート
 23 TELNET
 25 SMTP
 
-#ifconfig(interface configuration)
+#ipconfig：Windows環境
+#ifconfig(interface configuration)：Linux環境
 IP     （IPアドレス）
 subnet （サブネット）
 up/down（インターフェース有効無効）
@@ -70,6 +82,18 @@ ip route del default
 ip route del default via 192.168.122.1
 
 ip -s link show デバイス :-sオプションでバイト数などの統計情報を表示できる
+
+ip addr        IPv4,IPv6アドレス
+ip link        ネットワークデバイス
+ip neighbor sh ARPキャッシュの内容を確認
+ip route       ルーティングテーブル
+
+#netstat:有効なネットワーク接続や開いているソケットの情報等を表示
+netstat    有効なネットワーク、ソケット情報
+netstat -r ルーティングテーブ
+netstat -i ネットワークインターフェースの統計情報
+netstat -n DNS無しの表示
+
 
 #ssコマンド:netstatの後継コマンド
 ・ifconfig
