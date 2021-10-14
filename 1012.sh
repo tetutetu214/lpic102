@@ -1,7 +1,16 @@
-#pingコマンド
+#pingコマンド 
+時間超過や宛先到達不能などのエラー原因が返される
+ICMPエコー要求パケットを送信すると、応答パケットが返される
+
 ping -c 送信回数（カウント）
 ping -i 送信間隔(インターバル)
 ping -n アドレスで表示（DNS）
+
+#systemdのシステムでネットワークを設定するデーモン
+systemd-networkd
+設定
+/etc/systemd/network
+
 
 #ルーティングテーブルを表示
 ipコマンド
@@ -63,13 +72,13 @@ nmcli オブジェクト[コマンド]
 				limited ネットワークに接続しているが、ネットアクセスできない
 				none    接続していない
 				unknown 見つからない
-			radio
+			radio wifi  wifiの有効化無効化（接続させるまではdevice）
 			connection  modify ID(接続IDの設定ファイルを変更する)
 			device      show(IPアドレスなどの詳細情報を表示)
                   delete（ソフトウェアデバイスを削除）
                   modify インターフェイス(インターフェイスの設定ファイルを変更する)
 									wifi connect(wifiにアクセスポイント接続のための作成コマンド)
-
+#nslookup:DNSへ問い合わせ
 
 #digコマンド：DNSへ直接問い合わせ（DNSに関するデバッギングツール）
   DNSサーバから詳細な情報
@@ -90,6 +99,7 @@ host -v 詳細な出力
 host -t mx yahoo.co.jp
 
 #ウェルノウンポート
+20 FTP
 23 TELNET
 25 SMTP
 
@@ -108,13 +118,13 @@ ip route del default via 192.168.122.1
 ip -s link show デバイス :-sオプションでバイト数などの統計情報を表示できる
 
 ip addr        IPv4,IPv6アドレス
-ip link        ネットワークデバイス
+ip link        ネットワークデバイス（インターフェイスのこと）
 ip neighbor sh ARPキャッシュの内容を確認
 ip route       ルーティングテーブル
 
 #netstat:有効なネットワーク接続や開いているソケットの情報等を表示
-netstat    有効なネットワーク、ソケット情報
-netstat -r ルーティングテーブ
+netstat    有効なネットワーク表示、ソケット情報表示
+netstat -r ルーティングテーブ表示
 netstat -i ネットワークインターフェースの統計情報
 netstat -n DNS無しの表示
 
@@ -141,3 +151,19 @@ ss -u UDPソケット表示
 /etc/nsswitch.conf     #名前解決の順序                             hosts:         filess dns
 /etc/resolv.conf       #DNS指定                                    domain         ping-t.com
 /etc/services          #サービス名とポート番号                     telnet         23/tcp
+
+
+#サービスとポート番号の対応
+#NetworkManager.動的にネットワークを管理する仕組み
+#nmcliNetworkManagerを管理するためのコマンドライン
+nmcli.connection-show...#接続状況を表示したい
+
+#routeコマンド
+netmask
+default gw
+
+#digコマンド・検索タイブ(オブションとは異なる)
+mx  メール
+ns  ネーム
+soa ドメイン
+txt テキスト
