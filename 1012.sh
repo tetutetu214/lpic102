@@ -12,10 +12,12 @@ systemd-networkd
 /etc/systemd/network
 
 
-#ルーティングテーブルを表示
+#ルーティングテーブル(デフォゲ)を表示（すべてにrouteのRが使われている）
 ipコマンド
+  ip route show
 routeコマンド
 netstatコマンド
+  netstat -r
 
 ##traepathコマンド
 宛先までの経路確認
@@ -32,8 +34,9 @@ IPv4,IPv6に対応
 112.78.124.10 ping-t.com
 
 /etc/resolv.conf:DNSサーバ
-（例）
+（例）数値（ネームサーバ）をドメイン（ドメイン）にする
 nameserver 192.168.1.1
+domain ping-t.com
 
 #ブロードキャスト
 全て1
@@ -66,18 +69,21 @@ wifi    無線
 #nmcliコマンド＝NetworkManagerを管理するためのコマンドラインインタフェース（CLI）
 nmcli オブジェクト[コマンド]
       general status #NetworkManagerの状態を表示する
+              hostname #ホスト名を設定できる
       networking connectivity #ネットワークの接続状態を表示できる
         full    ネットアクセス可能
 				portal  ログインしないとネットアクセスできない
 				limited ネットワークに接続しているが、ネットアクセスできない
 				none    接続していない
 				unknown 見つからない
-			radio wifi  wifiの有効化無効化（接続させるまではdevice）
+			radio wifi  on/off  wifiの有効化無効化（接続させるまではdevice）
 			connection  modify ID(接続IDの設定ファイルを変更する)
+                  up/down (コネはupdown)
 			device      show(IPアドレスなどの詳細情報を表示)
                   delete（ソフトウェアデバイスを削除）
                   modify インターフェイス(インターフェイスの設定ファイルを変更する)
 									wifi connect(wifiにアクセスポイント接続のための作成コマンド)
+									connect/disconnect(ネットワークデバイスの接続切断)
 #nslookup:DNSへ問い合わせ
 
 #digコマンド：DNSへ直接問い合わせ（DNSに関するデバッギングツール）
@@ -158,9 +164,10 @@ ss -u UDPソケット表示
 #nmcliNetworkManagerを管理するためのコマンドライン
 nmcli.connection-show...#接続状況を表示したい
 
-#routeコマンド
+#routeコマンド：デフォゲの設定を確認できる
 netmask
 default gw
+
 
 #digコマンド・検索タイブ(オブションとは異なる)
 mx  メール
