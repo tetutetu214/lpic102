@@ -22,7 +22,7 @@ TCPラッパー
 /etc/xinetd.conf 全体設定
 /etc/xinetd.d    個別設定
 
-設定項目
+#設定項目
 bind/interfae  インターフェイスのIPアドレス
 disable        サービスを無効化(無効化するなら =yes)
 instances      サーバの最大機動プロセス数
@@ -47,6 +47,7 @@ socketユニットを使用する
 (SSHクライアント＝自分)
 /etc/ssh/ssh_config
 
+SSHサーバのデーモンsshdの設定
 設定パス
 (SSHサーバ＝sshd側)
 /etc/ssh/sshd_config
@@ -103,6 +104,8 @@ ssh -L 8000:localhost:80 user@ssh-server
 gpg --import
 gpt --list-keys
 
+認証を一定期間キャッシュするデーモンプログラム
+gpg-agent
 
 #lastコマンド
 設定
@@ -122,6 +125,8 @@ gpt --list-keys
 -n(namespace) 名前空間（file,udp,tcp）
 -u(user)      ユーザ
 -v(verbose)   詳細
+
+fuser -k -n tcp 65432(ポート番号)
 
 #w/whoコマンド
 /var/run/utmp を参照して、現在ログインしているユーザを特定する
