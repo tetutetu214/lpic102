@@ -4,10 +4,15 @@
 #groupsコマンド
   ユーザの所属するグループを表示
 
-#usermod/groupmod
-  既存のアカウントの設定変更
 
--G プライマリ以外のグループに参加・不参加（どちらも同じコマンドでおこなう） 
+#usermod
+  所属している内容についての変更
+-L
+-U
+-g
+
+#groupmod
+  グループ名の変更、GIDの変更などのグループに対して
 -g グループのID（GID）を変更する
 -n グループ名を変更する
 
@@ -178,7 +183,7 @@ ip route show
 lprm -PPrinterB 500(500というジョブ番号は数値のみで表示)
 
 #ulimit
--a all
+-a all(リソースの全て)
 -c core
 -f file
 -u userprocess
